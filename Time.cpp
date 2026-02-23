@@ -42,7 +42,7 @@ Time Time::fromString(const std::string& timeStr) {
     std::istringstream iss(timeStr);
 
     // Expecting format "MM/DD/YYYY HH:MM:SS AM/PM"
-    char slash1, slash2, colon1, colon2, space1, space2;
+    char slash1, slash2, colon1, colon2, space1;
     std::string ampm;
     iss >> tm.tm_mon >> slash1 >> tm.tm_mday >> slash2 >> tm.tm_year
         >> space1 >> tm.tm_hour >> colon1 >> tm.tm_min >> colon2 >> tm.tm_sec >> ampm;
