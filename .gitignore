@@ -1,0 +1,9 @@
+# Build files
+*.o
+tasks
+
+# macOS
+.DS_Store
+
+# Output directory
+bin/
