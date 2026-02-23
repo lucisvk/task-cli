@@ -1,19 +1,14 @@
-#include <iostream> 
+#include <iostream>
+#include "Time.h"  // <-- corrected
 
-using namespace std; 
-
-
-
-int main() { 
+// g++ -std=c++17 main.cpp Time.cpp -o ~/bin/tasks
 
 
-cout << "TASK-CLI START UP." << endl; 
+int main() {
+    auto createdAt = Time::now();
+    std::string formatted = Time::toString(createdAt);
+    std::cout << "Created at: " << formatted << "\n";
 
-
-
-
-
-
-
-    return 0;
+    auto parsed = Time::fromString(formatted);
+    std::cout << "Parsed again: " << Time::toString(parsed) << "\n";
 }
