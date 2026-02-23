@@ -4,6 +4,7 @@
 class Commands {
 public:
     static void Help();
+    static void Version(); 
 };
 
 #endif

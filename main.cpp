@@ -15,9 +15,12 @@ int main() {
     if (userin == "--help" ) { 
             cmd.Help();  
 
+    } else if (userin == "-v") { 
+            cmd.Version(); 
     } else { 
         std::cout << "Please enter a valid option or enter --help for a list of commands."; 
     }
 
     return 0;
 }
+

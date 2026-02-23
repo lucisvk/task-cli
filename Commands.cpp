@@ -63,3 +63,8 @@ Output Format Example:
     2   [✓]      02/22/2026 03:41 PM     Apply to internship
 )";
 }
+
+void Commands::Version() { 
+    double Ver = 1.0; 
+    std::cout << "You are running task-cli Version " << Ver << std::endl; 
+}
