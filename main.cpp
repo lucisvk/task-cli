@@ -1,37 +1,62 @@
 #include <iostream>
 #include <string>
-#include "Commands.h"
-#include "Time.h" 
-#include "TaskManager.h"
+#include "src/Commands.h"
+#include "src/TaskManager.h"
+#include "src/Time.h"
 
-int main(int argc, char* argv[])
+int main()
 {
-    if (argc < 2)
-    {
-        std::cout << "TASK-CLI START UP.\n";
-        std::cout << "Type 'tasks help' for available commands.\n";
-        return 0;
-    }
+    TaskManager manager;
 
-    std::string command = argv[1];
+    std::cout << "TASK-CLI v1.0\n";
+    std::cout << "Type 'help' to see available commands.\n";
 
-    if (command == "help" || command == "-h" || command == "--help")
+    while (true)
     {
-        Commands::Help();
-    }
-    else if (command == "version" || command == "-v" || command == "--version")
-    {
-        Commands::Version();
-    }
-    else if (command == "add")
-    {
-        Commands cmd;   
-        cmd.Add();
-    }
-    else
-    {
-        std::cout << "Unknown command: " << command << "\n";
-        std::cout << "Type 'tasks help' to see available commands.\n";
+        std::cout << "\ntasks> ";
+        std::string command;
+        std::getline(std::cin, command);
+
+        if (command.empty())
+            continue; // ignore empty input
+
+        if (command == "help")
+        {
+            Commands::Help();
+        }
+        else if (command == "version")
+        {
+            Commands::Version();
+        }
+        else if (command == "add")
+        {
+            Commands cmd;
+            cmd.Add(manager); 
+        }
+        else if (command == "list")
+        {
+            manager.listTasks();
+        }
+        else if (command.rfind("done ", 0) == 0) 
+        {
+            int taskId = std::stoi(command.substr(5));
+            manager.completeTask(taskId);
+        }
+        else if (command.rfind("delete ", 0) == 0) 
+        {
+            int taskId = std::stoi(command.substr(7));
+            manager.deleteTask(taskId);
+        }
+        else if (command == "exit")
+        {
+            std::cout << "Exiting TASK CLI. Goodbye!\n";
+            break;
+        }
+        else
+        {
+            std::cout << "Unknown command: " << command << "\n";
+            std::cout << "Type 'help' to see available commands.\n";
+        }
     }
 
     return 0;
