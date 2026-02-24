@@ -1,5 +1,59 @@
 #include <iostream>
+#include <chrono>
+#include <iomanip>
+#include <sstream>
+#include <ctime>
 #include "Commands.h"
+
+
+void Commands::Add() 
+{ 
+    std::cout << "Enter The specification about your task." << std::endl; 
+
+    std::string description; 
+    std::string dateInput;
+    std::string timeInput;
+    std::string topic; 
+    
+    std::cout << "Please Enter the task description: " << std::endl;
+    std::getline(std::cin, description);
+
+    std::cout << "Please Enter the task due date MM/DD/YYYY: ";
+    std::getline(std::cin, dateInput);
+    
+    std::cout << "Please Enter the time the task is due (HH:MM 24 hour format:) ";
+    std::getline(std::cin, timeInput);
+
+    std::cout << "Lastly Enter the task topic: ";
+    std::getline(std::cin, topic);
+    
+
+    std::tm due = {};
+    std::stringstream ss(dateInput + " " + timeInput);
+
+    ss >> std::get_time(&due, "%m/%d/%Y %H:%M");
+
+    if (ss.fail())
+    {
+        std::cout << "Invalid date/time format.\n";
+        return;
+    }
+
+    time_t dueTime = std::mktime(&due);
+
+    time_t now = std::time(nullptr);
+
+    if (dueTime <= now)
+    {
+        std::cout << "This task is already overdue!\n";
+    }
+
+};
+
+
+
+
+
 
 void Commands::Help()
 {
