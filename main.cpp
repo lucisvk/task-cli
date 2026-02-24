@@ -1,33 +1,38 @@
 #include <iostream>
-#include <string> 
-#include "Time.h"
+#include <string>
 #include "Commands.h"
+#include "Time.h" 
+#include "TaskManager.h"
 
-int main() {
-    Time now;
-    std::cout << now.toString() << "\n";
-    std::cout << "Welcome to task-cli enter --help to get a list of available commands." << std::endl;
-    std::cout << "Enter exit to close the application." << std::endl; 
-    Commands cmd; 
-    std::string userin; 
-    bool running = true; 
+int main(int argc, char* argv[])
+{
+    if (argc < 2)
+    {
+        std::cout << "TASK-CLI START UP.\n";
+        std::cout << "Type 'tasks help' for available commands.\n";
+        return 0;
+    }
 
-    while (running) {
-        std::cin >> userin; 
+    std::string command = argv[1];
 
-        if (userin == "--help" ) { 
-                cmd.Help();  
-            } else if (userin == "-v") { 
-                    cmd.Version(); 
-            } else if (userin == "add") {
-                    cmd.Add(); 
-            } else if(userin == "exit") {
-                    running = false;
-            } else { 
-                std::cout << "Please enter a valid option or enter --help for a list of commands." << std::endl; 
-            }
+    if (command == "help" || command == "-h" || command == "--help")
+    {
+        Commands::Help();
+    }
+    else if (command == "version" || command == "-v" || command == "--version")
+    {
+        Commands::Version();
+    }
+    else if (command == "add")
+    {
+        Commands cmd;   
+        cmd.Add();
+    }
+    else
+    {
+        std::cout << "Unknown command: " << command << "\n";
+        std::cout << "Type 'tasks help' to see available commands.\n";
     }
 
     return 0;
 }
-
