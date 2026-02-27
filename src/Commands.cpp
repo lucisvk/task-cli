@@ -29,6 +29,9 @@ Utility Commands:
 
     version
         Display CLI version information.
+    
+    Check_U
+        Will check for any new versions of task-cli. 
 )" << std::endl;
 }
 
