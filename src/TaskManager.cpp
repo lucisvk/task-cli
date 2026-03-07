@@ -16,6 +16,16 @@ void TaskManager::addTask(const std::string& desc, const std::string& topic,
     tasks.push_back(t);
 }
 
+bool TaskManager::isEmpty()
+ { 
+   if(tasks.empty()) { 
+     return true; 
+   }
+
+   return false; 
+}
+
+
 void TaskManager::listTasks() const
 {
     if (tasks.empty())

@@ -26,6 +26,7 @@ public:
     void listTasks() const;
     void completeTask(int id);
     void deleteTask(int id);
+    bool isEmpty(); 
 };
 
 #endif
