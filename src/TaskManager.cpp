@@ -39,6 +39,8 @@ void TaskManager::listTasks() const
 
 void TaskManager::completeTask(int id)
 {
+    
+    listTasks(); 
     for (auto& t : tasks)
     {
         if (t.id == id)

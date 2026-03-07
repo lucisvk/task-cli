@@ -37,16 +37,44 @@ int main()
         {
             manager.listTasks();
         }
-        else if (command.rfind("done ", 0) == 0) 
+        else if (command == "done") 
         {
-            int taskId = std::stoi(command.substr(5));
-            manager.completeTask(taskId);
+            std::cout << "Which task would u like to mark as completed." << std::endl; 
+            manager.listTasks();
+            int taskId;
+            std::string input;
+            std::cout << "Option: ";
+            std::getline(std::cin, input);
+            try
+            {
+                taskId = std::stoi(input);
+                manager.completeTask(taskId);
+            }
+            catch (const std::invalid_argument& e)
+            {
+                std::cout << "Invalid input. Please enter a valid task ID.\n";
+            }
         }
-        else if (command.rfind("delete ", 0) == 0) 
+        else if (command == "delete")
         {
-            int taskId = std::stoi(command.substr(7));
-            manager.deleteTask(taskId);
+            std::cout << "Which task would you like to delete?" << std::endl;
+            manager.listTasks();
+            std::string input;
+            std::cout << "Option: "; 
+            int taskId;
+            std::getline(std::cin, input);
+            try 
+            {
+               taskId = std::stoi(input); 
+               manager.deleteTask(taskId); 
+            } 
+            catch (const std::invalid_argument& e)
+            {
+                std::cout << "Invalid input. Please enter a valid task ID.\n";
+            }
+          
         }
+
         else if (command == "exit")
         {
             std::cout << "Exiting TASK CLI. Goodbye!\n";
